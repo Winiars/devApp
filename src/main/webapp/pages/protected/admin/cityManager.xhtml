@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <ui:composition template="/pages/public/templates/master.xhtml">
+        <ui:define name="main">
+            <p:growl id="growl" life="30000" autoUpdate="true"/>
+
+            <p align="center"> Admin Panel </p>
+
+            <h:form id="adminIndexForm">
+                <p:dataTable var="city" value="#{cityMB.allCities}" id="citiesTable">
+                    <p:column headerText="City">
+                        <h:outputText value="#{city.name}"/>
+                    </p:column>
+
+                    <p:column>
+                        <p:commandButton value="delete" onclick="PF('cityDeleteDialogWidget').show()"
+                                         update=":cityDeleteDialogForm">
+                            <f:setPropertyActionListener value="#{city}" target="#{cityMB.city}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+                <p:commandButton value="Add" icon="ui-icon-plus" update=":cityCreateDialogForm" actionListener="#{cityMB.resetCity}"
+                                 onclick="PF('cityCreateDialogWidget').show()"/>
+
+            </h:form>
+
+            <ui:include src="/pages/protected/admin/dialogs/city/createCityDialog.xhtml"/>
+            <ui:include src="dialogs/city/deleteCityDialog.xhtml"/>
+
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

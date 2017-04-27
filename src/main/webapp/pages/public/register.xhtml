@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+
+<h:body>
+    <ui:composition template="/pages/public/templates/main.xhtml">
+        <ui:define name="bottom">
+
+            <h:form>
+                <p:growl id="growl" life="30000" />
+
+                <p:wizard flowListener="#{registerMB.onFlowProcess}" backLabel="go Back" nextLabel="go Next" >
+                    <p:tab id="userDetails" title="User Details">
+                        <p:panel header="User Details">
+                            <h:panelGrid columns="3" columnClasses="label, value">
+                                <h:outputText value="Nick: *"/>
+                                <p:inputText value="#{registerMB.user.nick}" required="true" label="Firstname"
+                                             id="nick">
+                                    <f:validator validatorId="nickValidator"/>
+                                </p:inputText>
+                                <h:message for="nick" style="color:red" showSummary="true"/>
+                                <h:outputLabel for="pwd1" value="Password 1: *"/>
+                                <p:password id="pwd1" value="#{registerMB.user.password}" match="pwd2"
+                                            label="Password 1"
+                                            required="true" feedback="true"
+                                            promptLabel="#{msgs.passwordenter}" weakLabel="#{msgs.passwordweak}"
+                                            requiredMessage="You have to enter a password"
+                                            goodLabel="#{msgs.passwordgood}" strongLabel="#{msgs.passwordstrong}"
+                                            validatorMessage="Passwords don't match"/>
+                                <h:message for="pwd1" style="color:red"/>
+                                <h:outputLabel for="pwd2" value="Password 2: *"/>
+                                <p:password id="pwd2" value="#{registerMB.user.password}" label="Password 2"
+                                            required="true" feedback="true"
+                                            promptLabel="#{msgs.passwordconfirm}" weakLabel="#{msgs.passwordweak}"
+                                            goodLabel="#{msgs.passwordgood}" strongLabel="#{msgs.passwordstrong}"
+                                            requiredMessage="Confirmation of password is required"/>
+                                <h:message for="pwd2" style="color:red"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="personal" title="Personal">
+                        <p:panel header="Personal Details">
+                            <p:messages/>
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Firstname: *"/>
+                                <p:inputText value="#{registerMB.user.name}" required="false" label="Firstname"/>
+
+                                <h:outputText value="Lastname: *"/>
+                                <p:inputText value="#{registerMB.user.surname}" required="false" label="Lastname"/>
+
+                                <h:outputText value="Age: "/>
+                                <p:inputText value="#{registerMB.user.age}"/>
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="address" title="Address">
+                        <p:panel header="Address Details">
+                            <p:messages/>
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Street: "/>
+                                <p:inputText value="#{registerMB.user.street}"/>
+
+                                <h:outputText value="Postal Code: "/>
+                                <p:inputText value="#{registerMB.user.postCode}"/>
+
+                                <h:outputText value="City: "/>
+                                <p:inputText value="#{registerMB.user.city}"/>
+
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="contact" title="Contact">
+                        <p:panel header="Contact Information">
+                            <p:messages/>
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Email: *"/>
+                                <p:inputText value="#{registerMB.user.email}" required="false" label="Email" validatorMessage="Invalid email format">
+                                    <f:validateRegex
+                                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                </p:inputText>
+
+                                <h:outputText value="Phone: "/>
+                                <p:inputText value="#{registerMB.user.phoneNumber}"/>
+
+                                <h:outputText value="Additional Info: "/>
+                                <p:inputText value="#{registerMB.user.info}"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="confirm" title="Confirmation">
+                        <p:panel header="Confirmation">
+                            <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="Firstname: "/>
+                                    <h:outputText value="#{registerMB.user.name}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Lastname: "/>
+                                    <h:outputText value="#{registerMB.user.surname}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Age: "/>
+                                    <h:outputText value="#{registerMB.user.age}" styleClass="outputLabel"/>
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="Street: "/>
+                                    <h:outputText value="#{registerMB.user.street}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Postal: "/>
+                                    <h:outputText value="#{registerMB.user.postCode}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="City: "/>
+                                    <h:outputText value="#{registerMB.user.city}" styleClass="outputLabel"/>
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="Email: "/>
+                                    <h:outputText value="#{registerMB.user.email}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Phone "/>
+                                    <h:outputText value="#{registerMB.user.phoneNumber}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Info: "/>
+                                    <h:outputText value="#{registerMB.user.info}" styleClass="outputLabel"/>
+
+                                    <h:outputText/>
+                                    <h:outputText/>
+                                </h:panelGrid>
+                            </h:panelGrid>
+
+                            <p:commandButton value="Submit" action="#{registerMB.createUser}"  ajax="false"/>
+
+                        </p:panel>
+                    </p:tab>
+                </p:wizard>
+
+            </h:form>
+
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

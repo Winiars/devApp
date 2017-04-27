@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head/>
+<f:metadata>
+    <f:event type="preRenderView" listener="#{flatMB.pullFlatFromFlash}"/>
+</f:metadata>
+<h:head/>
+
+
+<h:body>
+    <ui:composition template="/pages/public/templates/master.xhtml">
+        <ui:define name="main">
+            <p:growl id="growl" life="30000" autoUpdate="true"/>
+
+            <p align="center"> Flat Reservation </p>
+
+
+
+            <h:form id="flatsUpdateForm" prependId="false">
+                <h:panelGrid columns="2" cellpadding="5">
+
+                    <p:outputLabel value="name of flat"/>
+                    <p:inputText value="#{flatMB.flat.name}" label="cityName"/>
+
+                    <p:outputLabel value="select city: "/>
+                    <p:selectOneMenu value="#{flatMB.flat.city}" required="true">
+                        <f:selectItems var="city" value="#{cityMB.allCities}" itemValue="#{city}" itemLabel="#{city.name}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="startDate" value="set begining date" />
+                    <p:calendar id="startDate" value="#{flatMB.flat.startDate}" />
+
+                    <p:outputLabel for="finishDate" value="set finish date" />
+                    <p:calendar id="finishDate" value="#{flatMB.flat.finishDate}" mindate="#{flatMB.today}" />
+
+                    <p:outputLabel value="street: "/>
+                    <p:inputText value="#{flatMB.flat.street}"/>
+
+                    <p:outputLabel value="Description: "/>
+                    <p:outputLabel  value="#{flatMB.flat.description}" />
+
+                    <p:commandButton value="book" icon="ui-icon-plus" action="#{flatMB.addUserToFlat}"/>
+
+
+
+                </h:panelGrid>
+            </h:form>
+
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

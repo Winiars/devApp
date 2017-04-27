@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+    <ui:composition template="/pages/public/templates/master.xhtml">
+        <ui:define name="main">
+            <p:growl id="growl" life="30000" autoUpdate="true"/>
+
+            <p align="center"> Admin Panel </p>
+
+            <h:form id="flatsForm">
+                <p:dataTable var="flat" value="#{flatMB.allFlats}" id="flatsTableId" paginator="true"
+                             widgetVar="flatsTable" filteredValue="#{flatMB.filteredFlats}">
+
+                    <f:facet name="header">
+                        <p:outputPanel>
+                            <h:outputText value="Search all fields:"/>
+                            <p:inputText id="globalFilter" onkeyup="PF('flatsTable').filter()" style="width:150px"
+                                         placeholder="Enter keyword"/>
+                        </p:outputPanel>
+                    </f:facet>
+
+                    <p:column headerText="name" filterMatchMode="startsWith" filterBy="#{flat.name}" >
+                        <h:outputText value="#{flat.name}"/>
+                    </p:column>
+
+                    <p:column filterBy="#{flat.city}" headerText="city" filterMatchMode="exact">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('flatsTable').filter()">
+                                <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItems var="city" value="#{cityMB.allCities}" itemValue="#{city}"
+                                               itemLabel="#{city.name}"/>
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <h:outputText value="#{flat.city.name}"/>
+                    </p:column>
+
+                    <p:column headerText="street" filterMatchMode="startsWith" filterBy="#{flat.street}">
+                        <h:outputText value="#{flat.street}"/>
+                    </p:column>
+
+                    <p:column headerText="start date" filterMatchMode="startsWith" filterBy="#{flat.startDate}">
+                        <h:outputText value="#{flat.startDate}"/>
+                    </p:column>
+
+                    <p:column headerText="finish date" filterMatchMode="startsWith" filterBy="#{flat.finishDate}">
+                        <h:outputText value="#{flat.finishDate}"/>
+                    </p:column>
+
+                    <p:column headerText="description" filterMatchMode="contains" filterBy="#{flat.description}">
+                        <h:outputText value="#{flat.description}"/>
+                    </p:column>
+
+                    <p:column>
+                        <p:commandButton value="delete" onclick="PF('flatDeleteDialogWidget').show()"
+                                         update=":flatDeleteDialogForm" >
+                            <f:setPropertyActionListener value="#{flat}" target="#{flatMB.flat}"/>
+                        </p:commandButton>
+                        <p:commandButton value="update" action="#{flatMB.navigateToUpdateWithFlash}">
+                            <f:setPropertyActionListener value="#{flat}" target="#{flatMB.flat}"/>
+                        </p:commandButton>
+                    </p:column>
+
+
+                </p:dataTable>
+                <p:commandButton value="delete selected" onclick="PF('selectedFlatsDeleteDialogWidget').show()"
+                                 update=":selectedFlatsDeleteDialogForm"/>
+
+            </h:form>
+
+            <ui:include src="dialogs/flat/deleteFlatDialog.xhtml"/>
+            <ui:include src="dialogs/flat/deleteAllSelectedFlatDialog.xhtml"/>
+
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Grubson APK</title>
+    <h:outputStylesheet library="css" name="main.css"/>
+</h:head>
+
+<h:body>
+
+    <div id="divTop">
+        <ui:insert name="top">
+            <ui:include src="/pages/public/templates/top.xhtml"/>
+        </ui:insert>
+    </div>
+
+    <div id="divLeft">
+        <ui:insert name="left">
+            <ui:include src="left.xhtml"/>
+        </ui:insert>
+
+    </div>
+
+    <div id="divMain">
+        <ui:insert name="main"></ui:insert>
+    </div>
+</h:body>
+
+
+
+
+</html>

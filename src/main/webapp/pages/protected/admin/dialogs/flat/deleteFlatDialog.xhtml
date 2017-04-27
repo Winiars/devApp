@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <p:dialog widgetVar="flatDeleteDialogWidget"
+               height="150" width="500" modal="true"
+              closable="true" draggable="false" resizable="false">
+        <h:form id="flatDeleteDialogForm" prependId="false">
+
+            <p:outputLabel value="Are you sure you want to delete #{flatMB.flat.name} ?"/>
+            <br/>
+            <p:commandButton value="Confirm" action="#{flatMB.deleteFlat}"
+                             onclick="PF('flatDeleteDialogWidget').hide()" update=":flatsForm:flatsTableId"/>
+            <p:commandButton value="Cancel" onclick="PF('flatDeleteDialogWidget').hide()"/>
+
+        </h:form>
+    </p:dialog>
+</h:body>
+</html>

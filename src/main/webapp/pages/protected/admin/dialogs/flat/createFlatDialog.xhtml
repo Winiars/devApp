@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <p:dialog widgetVar="flaUpdateDialogWidget"
+             height="150" width="500" modal="true"
+              closable="true" draggable="false" resizable="false">
+        <h:form id="flatCreateDialogForm" prependId="false">
+            <h:panelGrid columns="2">
+                <h:outputText value="name of flat"/>
+                <h:inputText value="#{flatMB.flat.name}"  label="cityName"/>
+               <h:selectOneMenu value="#{flatMB.flat.city}" required="true">
+               <f:selectItems var="city" value="#{cityMB.allCities}" itemValue="#{city}" itemLabel="#{city.name}"/>
+               </h:selectOneMenu>
+
+                <p:commandButton value="create" icon="ui-icon-plus" action="#{flatMB.createFlat}"
+                                 onclick="PF('flatCreateDialogWidget').hide()">
+                </p:commandButton>
+                <p:commandButton value="close" icon="ui-icon-minus"
+                                 onclick="PF('flatCreateDialogWidget').hide()">
+                </p:commandButton>
+            </h:panelGrid>
+        </h:form>
+    </p:dialog>
+</h:body>
+</html>

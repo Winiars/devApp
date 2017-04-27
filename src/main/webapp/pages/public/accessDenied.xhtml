@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+
+<h:body>
+    <ui:composition template="/pages/public/templates/main.xhtml">
+        <ui:define name="bottom">
+            <p:growl id="growl" life="30000" autoUpdate="true"/>
+
+            <p align="center">  Acces Denied </p>
+            <br/>
+            Sorry, You don't have permission to this site.
+            <div class="buttonHolder">
+            <h:form>
+
+                <p:commandButton value="#{msgs.login}" action="login?faces-redirect=true" id="login" styleClass="ui-priority-primary"/>
+                <p:commandButton action="register?faces-redirect=true" value="#{msgs.register}" id="register" styleClass="ui-priority-primary" ajax="false"/>
+
+            </h:form>
+            </div>
+
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
+
+        <!--<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a-->
+        <!--href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a-->
+        <!--href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"-->
+        <!--target="_blank">CC 3.0 BY</a></div>-->

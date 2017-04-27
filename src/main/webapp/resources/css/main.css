@@ -1,0 +1,115 @@
+body {
+    background-color: lightblue;
+}
+
+h1.center {
+    color: tomato;
+    text-align: center;
+}
+
+p {
+    font-family: verdana;
+    font-size: 20px;
+}
+
+.polishIcon {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 8px;
+    right: 16px;
+
+}
+
+.englishIcon {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 8px;
+    right: 100px;
+
+}
+
+
+#divTop {
+    padding: 0 0 0 10px;
+    margin: 0;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    height: 80px;
+    overflow: hidden;
+    background: #dddddd;
+    border: 1px solid darkGray;
+}
+
+#divBottom {
+    padding: 10px 0 0;
+    margin: 0;
+    position: absolute;
+    top: 100px;
+    left: 10px;
+    right: 10px;
+    bottom: 20px;
+    overflow: auto;
+    border: thin solid lightGray;
+    background: #fefeef;
+}
+
+.buttonHolder{
+
+    vertical-align: center;
+
+
+
+    }
+
+
+#divLeft {
+    padding: 0 0 0 10px;
+    margin: 0;
+    position: absolute;
+    top: 100px;
+    left: 10px;
+    bottom: 20px;
+    overflow: auto;
+    background: #dddddd;
+    border: 1px solid darkGray;
+    width: 250px;
+
+}
+
+#divMain {
+    padding: 0;
+    padding-top: 10px;
+    margin: 0;
+    position: absolute;
+    top: 100px;
+    left: 280px;
+    right: 10px;
+    bottom: 20px;
+    overflow: auto;
+    border: thin solid lightGray;
+    background: #fefeef;
+}
+
+.btn-group {
+    background-color: #4CAF50; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    width: 50%; /* Set a width if needed */
+    display: block; /* Make the buttons appear below each other */
+}
+
+/*.btn-group button:not(:last-child) {*/
+    /*border-bottom: none; !* Prevent double borders *!*/
+/*}*/
+
+/* Add a background color on hover */
+/*.btn-group button:hover {*/
+    /*background-color: #3e8e41;*/
+/*}*/
+
