@@ -25,25 +25,24 @@
             <h:form id="flatsUpdateForm" prependId="false">
                 <h:panelGrid columns="2" cellpadding="5">
 
-                    <p:outputLabel value="name of flat"/>
-                    <p:inputText value="#{flatMB.flat.name}" label="cityName"/>
+                    <h:outputText value="name of flat"/>
+                    <h:outputText value="#{flatMB.flat.name}" label="cityName"/>
 
-                    <p:outputLabel value="select city: "/>
-                    <p:selectOneMenu value="#{flatMB.flat.city}" required="true">
-                        <f:selectItems var="city" value="#{cityMB.allCities}" itemValue="#{city}" itemLabel="#{city.name}"/>
-                    </p:selectOneMenu>
+                    <h:outputText value="city: "/>
+                    <h:outputText value="#{flatMB.flat.city.name}"/>
 
-                    <p:outputLabel for="startDate" value="set begining date" />
+                    <h:outputText value="street: "/>
+                    <h:outputText value="#{flatMB.flat.street}"/>
+
+                    <h:outputText value="Description: "/>
+                    <h:outputText value="#{flatMB.flat.description}"/>
+
+                    <h:outputText for="startDate" value="set begining date"/>
                     <p:calendar id="startDate" value="#{flatMB.flat.startDate}" />
 
-                    <p:outputLabel for="finishDate" value="set finish date" />
-                    <p:calendar id="finishDate" value="#{flatMB.flat.finishDate}" mindate="#{flatMB.today}" />
+                    <h:outputText for="finishDate" value="set finish date"/>
+                    <p:calendar id="finishDate" value="#{flatMB.flat.finishDate}"/>
 
-                    <p:outputLabel value="street: "/>
-                    <p:inputText value="#{flatMB.flat.street}"/>
-
-                    <p:outputLabel value="Description: "/>
-                    <p:outputLabel  value="#{flatMB.flat.description}" />
 
                     <p:commandButton value="book" icon="ui-icon-plus" action="#{flatMB.addUserToFlat}"/>
 
