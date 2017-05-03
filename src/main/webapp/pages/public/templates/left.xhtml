@@ -9,7 +9,7 @@
     <ui:composition>
 
                 <h:form>
-                    <div class="btn-group">
+                    <!--<div class="btn-group">-->
                     <p:commandButton value="#{msgs.login}" rendered="#{not userMB.roleAdminOrUser}" action="login?faces-redirect=true" id="login" />
                     <br/>
                     <br/>
@@ -30,7 +30,7 @@
                     <br/>
                     <br/>
                     <p:commandButton value="Log out" rendered="#{userMB.roleAdminOrUser}" action="#{loginMB.logout}"/>
-                    </div>
+                    <!--</div>-->
                 </h:form>
 
         </ui:composition>
