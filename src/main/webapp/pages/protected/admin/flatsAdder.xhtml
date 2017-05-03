@@ -27,10 +27,12 @@
                     </p:selectOneMenu>
 
                     <p:outputLabel for="startDate" value="set begining date"/>
-                    <p:calendar id="startDate" value="#{flatMB.flat.startDate}" mindate="#{flatMB.today}"/>
+                    <p:calendar id="startDate" value="#{flatMB.flat.startDate}" mindate="#{flatMB.today}">
+                        <p:ajax event="dateSelect" update="finishDate"/>
+                    </p:calendar>
 
                     <p:outputLabel for="finishDate" value="set finish date"/>
-                    <p:calendar id="finishDate" value="#{flatMB.flat.finishDate}" mindate="#{flatMB.today}"/>
+                    <p:calendar id="finishDate" value="#{flatMB.flat.finishDate}" mindate="#{flatMB.flat.startDate}"/>
 
                     <p:outputLabel value="street: "/>
                     <p:inputText value="#{flatMB.flat.street}"/>
