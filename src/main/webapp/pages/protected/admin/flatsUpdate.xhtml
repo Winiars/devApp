@@ -49,14 +49,23 @@
 
                 </h:panelGrid>
 
-                <p:dataTable var="user" value="#{flatMB.flatWithTenants.tenants}">
-                    <p:column headerText="nick">
-                        <h:outputText value="#{user.nick}"/>
+                <p:dataTable var="rent" value="#{flatMB.flat.rents}">
+                    <p:column headerText="name">
+                        <h:outputText value="#{rent.user.name}"/>
                     </p:column>
 
                     <p:column headerText="email">
-                        <h:outputText value="#{user.email}"/>
+                        <h:outputText value="#{rent.user.email}"/>
                     </p:column>
+
+                    <p:column headerText="from">
+                        <h:outputText value="#{rent.startDate}"/>
+                    </p:column>
+
+                    <p:column headerText="to">
+                        <h:outputText value="#{rent.finishDate}"/>
+                    </p:column>
+
 
                 </p:dataTable>
 

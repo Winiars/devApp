@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.faces.convert.FacesConverter;
 import java.util.Date;
 import java.util.List;
@@ -23,8 +24,8 @@ public class FlatMB extends AbstractMB {
     private Flat flat;
     private Flat flatWithTenants;
 
-    @ManagedProperty(value = "#{userMB}")
-    private UserMB userMB;
+//    @ManagedProperty(value = "#{userMB}")
+//    private UserMB userMB;
 
     private List<Flat> filteredFlats;
 
@@ -32,9 +33,9 @@ public class FlatMB extends AbstractMB {
         return filteredFlats;
     }
 
-    public void setUserMB(UserMB userMB) {
-        this.userMB = userMB;
-    }
+//    public void setUserMB(UserMB userMB) {
+//        this.userMB = userMB;
+//    }
 
     public void setFilteredFlats(List<Flat> filteredFlats) {
         this.filteredFlats = filteredFlats;
@@ -49,8 +50,10 @@ public class FlatMB extends AbstractMB {
 
     public Flat getFlat() {
         if (flat == null) {
+            System.out.println("flat rowne null");
             this.flat = new Flat();
         }
+        System.out.println("getFlat" + flat.getId());
         return flat;
     }
 
@@ -126,8 +129,11 @@ public class FlatMB extends AbstractMB {
 
     public void pullFlatFromFlash() {
         Flat flatToUpdate = (Flat) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("flat");
+        navigateWithFlash();
         this.flat = flatToUpdate;
+
     }
+
 
     public Date getToday() {
         return new Date();
@@ -149,16 +155,17 @@ public class FlatMB extends AbstractMB {
         }return flatWithTenants;
     }
 
-    public void addUserToFlat(){
-        try{
-            int userId=userMB.getUser().getId();
-            getFlatFacade().addUserToFlat(flat.getId(),userId);
-            displayInfoMessageToUserAfterRedirect("Flat booked successfully!");
-        }catch (Exception e){
-            e.printStackTrace();
-            displayErrorMessageToUser("Oops we couldn't book flat for you");
-        }
-    }
+
+//    public void addUserToFlat(){
+//        try{
+//            int userId=userMB.getUser().getId();
+//            getFlatFacade().addUserToFlat(flat.getId(),userId);
+//            displayInfoMessageToUserAfterRedirect("Flat booked successfully!");
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            displayErrorMessageToUser("Oops we couldn't book flat for you");
+//        }
+//    }
 
 
 }

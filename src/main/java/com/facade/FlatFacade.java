@@ -51,17 +51,7 @@ public class FlatFacade {
         flatDAO.closeTransaction();
     }
 
-    public void addUserToFlat (int flatId, int userId){
-        flatDAO.beginTransaction();
-        userDAO.joinTransaction();
-        Flat flat=flatDAO.find(flatId);
-        User user=userDAO.find(userId);
-        flat.getTenants().add(user);
-        user.getListOfFlats().add(flat);
-        flatDAO.commitTransaction();
-        flatDAO.closeTransaction();
 
-    }
 
     public Flat findFlatWithTenants(int flatId){
         flatDAO.beginTransaction();

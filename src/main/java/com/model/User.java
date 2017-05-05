@@ -38,16 +38,27 @@ public class User implements Serializable {
     private String info;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @ManyToMany(mappedBy = "tenants")
-    private List<Flat> listOfFlats;
+//    @ManyToMany(mappedBy = "tenants")
+//    private List<Flat> listOfFlats;
 
-    public List<Flat> getListOfFlats() {
-        return listOfFlats;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Rent> rents;
+
+    public void addRent(Rent rent) {
+        rents.add(rent);
+        rent.setUser(this);
     }
 
-    public void setListOfFlats(List<Flat> listOfFlats) {
-        this.listOfFlats = listOfFlats;
-    }
+//    public List<Flat> getListOfFlats() {
+//        return listOfFlats;
+//    }
+//
+//    public void setListOfFlats(List<Flat> listOfFlats) {
+//        this.listOfFlats = listOfFlats;
+//    }
+
+
+
 
     public Role getRole() {
         return role;

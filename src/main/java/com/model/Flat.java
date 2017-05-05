@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Entity
 
-@NamedQuery(name = "Flat.findFlatByIdWithTenants", query = "select f from Flat f left join fetch  f.tenants where f.id=:flatId")
+//@NamedQuery(name = "Flat.findFlatByIdWithTenants", query = "select f from Flat f left join fetch  f.tenants where f.id=:flatId")
 public class Flat {
 
     public static final String FIND_FLAT_BY_ID_WITH_TENANTS="Flat.findFlatByIdWithTenants";
@@ -26,20 +26,39 @@ public class Flat {
     private Date startDate;
     private Date finishDate;
 
-    @OneToOne
+    @OneToOne(optional = false)
     @JoinColumn(name = "cityID")
     private City city;
 
-    public List<User> getTenants() {
-        return tenants;
+
+    @OneToMany(mappedBy = "flat", cascade = CascadeType.ALL)
+    private List<Rent> rents;
+
+    public void addRent(Rent rent) {
+        rents.add(rent);
+        rent.setFlat(this);
     }
 
-    public void setTenants(List<User> tenants) {
-        this.tenants = tenants;
+    public List<Rent> getRents() {
+        return rents;
     }
 
-    @ManyToMany
-    private List<User> tenants;
+    public void setRents(List<Rent> rents) {
+        this.rents = rents;
+    }
+
+    //    @ManyToMany
+//    private List<User> tenants;
+
+//    public List<User> getTenants() {
+//        return tenants;
+//    }
+
+//    public void setTenants(List<User> tenants) {
+//        this.tenants = tenants;
+//    }
+
+
 
     public int getId() {
         return id;

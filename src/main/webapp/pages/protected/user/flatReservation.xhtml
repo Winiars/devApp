@@ -9,6 +9,7 @@
 <h:head/>
 <f:metadata>
     <f:event type="preRenderView" listener="#{flatMB.pullFlatFromFlash}"/>
+
 </f:metadata>
 <h:head/>
 
@@ -21,8 +22,7 @@
             <p align="center"> Flat Reservation </p>
 
 
-
-            <h:form id="flatsUpdateForm" prependId="false">
+            <h:form id="flatsReservationForm" prependId="false">
                 <h:panelGrid columns="2" cellpadding="5">
 
                     <h:outputText value="name of flat"/>
@@ -38,14 +38,17 @@
                     <h:outputText value="#{flatMB.flat.description}"/>
 
                     <h:outputText for="startDate" value="set begining date"/>
-                    <p:calendar id="startDate" value="#{flatMB.flat.startDate}" />
+                    <p:calendar id="startDate" value="#{rentMB.rent.startDate}" mindate="#{flatMB.today}">
+                        <p:ajax event="dateSelect" update="finishDate"/>
+                    </p:calendar>
 
                     <h:outputText for="finishDate" value="set finish date"/>
-                    <p:calendar id="finishDate" value="#{flatMB.flat.finishDate}"/>
+                    <p:calendar id="finishDate" value="#{rentMB.rent.finishDate}" mindate="#{rentMB.rent.startDate}"/>
 
 
-                    <p:commandButton value="book" icon="ui-icon-plus" action="#{flatMB.addUserToFlat}"/>
+                    <p:commandButton value="book" icon="ui-icon-plus" action="#{rentMB.createRent}">
 
+                    </p:commandButton>
 
 
                 </h:panelGrid>
