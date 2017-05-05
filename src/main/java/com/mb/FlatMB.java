@@ -23,6 +23,11 @@ public class FlatMB extends AbstractMB {
     private FlatFacade flatFacade;
     private Flat flat;
     private Flat flatWithTenants;
+    private String[] bookedDays;
+
+    private static final String QUOTE = "'";
+    private static final String TIME_FORMAT = "T00:00:00";
+    private static final String YEAR_MONTH_DAY_FORMAT = "yyyy-MM-dd";
 
 //    @ManagedProperty(value = "#{userMB}")
 //    private UserMB userMB;
@@ -156,16 +161,11 @@ public class FlatMB extends AbstractMB {
     }
 
 
-//    public void addUserToFlat(){
-//        try{
-//            int userId=userMB.getUser().getId();
-//            getFlatFacade().addUserToFlat(flat.getId(),userId);
-//            displayInfoMessageToUserAfterRedirect("Flat booked successfully!");
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            displayErrorMessageToUser("Oops we couldn't book flat for you");
-//        }
-//    }
+    public String getDisabledDays() {
+        return "[\"5-15-2013\", \"6-23-2013\"]";
+    }
+
+
 
 
 }
