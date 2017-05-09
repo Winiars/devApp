@@ -29,27 +29,28 @@ public class CityMB extends AbstractMB {
     public City getCity() {
         if (city == null) {
             city = new City();
-        } return city;
+        }
+        return city;
     }
 
-    public void setCity(City city){
-        this.city=city;
+    public void setCity(City city) {
+        this.city = city;
     }
 
 
-    public void createCity(){
+    public void createCity() {
         try {
 
             getCityFacade().createCity(this.city);
             resetCity();
             displayInfoMessageToUser("City created with succes!");
-        } catch (Exception e){
+        } catch (Exception e) {
             displayInfoMessageToUser("Ops we couldn't create city");
         }
 
     }
 
-    public List<City> getAllCities(){
+    public List<City> getAllCities() {
 
         return getCityFacade().listOfAll();
     }
@@ -59,14 +60,14 @@ public class CityMB extends AbstractMB {
             getCityFacade().deleteCity(city);
             resetCity();
             displayInfoMessageToUser("City deleted with succes!");
-        } catch (Exception e){
+        } catch (Exception e) {
             displayInfoMessageToUser("Ops we couldn't delete city");
         }
 
     }
 
     public void resetCity() {
-        this.city=new City();
+        this.city = new City();
     }
 
 }

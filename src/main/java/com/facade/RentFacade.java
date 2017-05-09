@@ -16,15 +16,6 @@ public class RentFacade {
     private FlatDAO flatDAO = new FlatDAO();
     private UserDAO userDAO = new UserDAO();
 
-//    public void createRent (Rent rent){
-//        rentDAO.beginTransaction();
-//        rentDAO.save(rent);
-//        rentDAO.commitTransaction();
-//        rentDAO.closeTransaction();
-//
-//    }
-
-
     public void addUserAndFlatToRent(int flatId, int userId, Rent rent) {
         rentDAO.beginTransaction();
         flatDAO.joinTransaction();
@@ -32,10 +23,6 @@ public class RentFacade {
 
         Flat flat = flatDAO.find(flatId);
         User user = userDAO.find(userId);
-
-        System.out.println("flat id=" + flatId);
-        System.out.println("rent id=" + rent.getId());
-        System.out.println("user id=" + userId);
 
         flat.addRent(rent);
         user.addRent(rent);

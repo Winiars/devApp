@@ -14,8 +14,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Gruby on 06.04.2017.
  */
-public class CustomMessagesBundle  extends ResourceBundle{
-
+public class CustomMessagesBundle extends ResourceBundle {
 
     protected static final String BUNDLE_NAME = "error";
     protected static final String BUNDLE_EXTENSION = "properties";

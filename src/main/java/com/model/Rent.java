@@ -18,10 +18,8 @@ public class Rent {
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User user;
-
     private Date startDate;
     private Date finishDate;
-
 
     @Override
     public boolean equals(Object o) {

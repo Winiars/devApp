@@ -22,18 +22,17 @@ public class LoginFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         //It will not create new session
         HttpSession session = request.getSession(false);
-        boolean loggedIn= (session!=null)&&(session.getAttribute("user")!=null);
-
-        if(loggedIn){
-             filterChain.doFilter(request, response);
-        }
-        else {
+        boolean loggedIn = (session != null) && (session.getAttribute("user") != null);
+        if (loggedIn) {
+            filterChain.doFilter(request, response);
+        } else {
             response.sendRedirect("/pages/public/login.xhtml");
         }
     }

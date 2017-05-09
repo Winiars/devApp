@@ -12,11 +12,9 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(unique = true)
+
     private String name;
 
-//    @OneToMany(targetEntity = Flat.class,mappedBy = "city")
-//    private List<Flat> flatList;
 
     @Override
     public boolean equals(Object o) {

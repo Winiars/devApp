@@ -11,17 +11,16 @@
               id="cityDeleteDialogId" height="150" width="500" modal="true"
               closable="true" draggable="false" resizable="false">
         <h:form id="cityDeleteDialogForm" prependId="false">
+            <h:outputText value="Are you sure you want to delete #{cityMB.city.name} ?"/>
+            <br/>
+            <p:commandButton value="delete" action="#{cityMB.deleteCity}"
+                             onclick="PF('cityDeleteDialogWidget').hide()"
+                             update=":adminIndexForm:citiesTable">
 
-                <h:outputText value="Are you sure you want to delete #{cityMB.city.name} ?"/>
-        <br/>
-                 <p:commandButton value="delete" action="#{cityMB.deleteCity}"
-                                 onclick="PF('cityDeleteDialogWidget').hide()"
-                                 update=":adminIndexForm:citiesTable">
-
-                </p:commandButton>
-                <p:commandButton value="cancel" icon="ui-icon-minus" actionListener="#{cityMB.resetCity}"
-                                 onclick="PF('cityDeleteDialogWidget').hide()">
-                </p:commandButton>
+            </p:commandButton>
+            <p:commandButton value="cancel" icon="ui-icon-minus" actionListener="#{cityMB.resetCity}"
+                             onclick="PF('cityDeleteDialogWidget').hide()">
+            </p:commandButton>
 
         </h:form>
     </p:dialog>

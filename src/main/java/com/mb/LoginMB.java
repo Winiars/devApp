@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RequestScoped
 @ManagedBean
-public class LoginMB extends AbstractMB{
+public class LoginMB extends AbstractMB {
 
-    @ManagedProperty(value= "#{userMB}")
+    @ManagedProperty(value = "#{userMB}")
     private UserMB userMB;
     private String email;
     private String password;
@@ -41,23 +41,23 @@ public class LoginMB extends AbstractMB{
         this.password = password;
     }
 
-    public String login(){
-        UserFacade userFacade=new UserFacade();
-        User user= userFacade.isValidLogin(email,password);
+    public String login() {
+        UserFacade userFacade = new UserFacade();
+        User user = userFacade.isValidLogin(email, password);
 
-        if(user==null){
+        if (user == null) {
             displayErrorMessageToUser("Wrong email or login)");
             return null;
-        }else{
+        } else {
             userMB.setUser(user);
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user",user);
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
             displayInfoMessageToUserAfterRedirect("Login with success!");
             return "/pages/protected/account?faces-redirect=true";
         }
 
     }
 
-    public String logout(){
+    public String logout() {
 
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         displayInfoMessageToUser("You have successfully logout");
@@ -65,8 +65,6 @@ public class LoginMB extends AbstractMB{
 
 
     }
-
-
 
 
 }

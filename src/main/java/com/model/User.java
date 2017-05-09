@@ -38,8 +38,6 @@ public class User implements Serializable {
     private String info;
     @Enumerated(EnumType.STRING)
     private Role role;
-//    @ManyToMany(mappedBy = "tenants")
-//    private List<Flat> listOfFlats;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Rent> rents;
@@ -48,17 +46,6 @@ public class User implements Serializable {
         rents.add(rent);
         rent.setUser(this);
     }
-
-//    public List<Flat> getListOfFlats() {
-//        return listOfFlats;
-//    }
-//
-//    public void setListOfFlats(List<Flat> listOfFlats) {
-//        this.listOfFlats = listOfFlats;
-//    }
-
-
-
 
     public Role getRole() {
         return role;
@@ -78,22 +65,18 @@ public class User implements Serializable {
 
         return Id == user.Id;
 
-
     }
 
     @Override
     public int hashCode() {
-
         return Id;
     }
 
     public int getId() {
-
         return Id;
     }
 
     public void setId(int id) {
-
         Id = id;
     }
 

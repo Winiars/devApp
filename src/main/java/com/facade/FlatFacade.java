@@ -12,24 +12,25 @@ import java.util.List;
  */
 public class FlatFacade {
 
-    private FlatDAO flatDAO=new FlatDAO();
-    private UserDAO userDAO=new UserDAO();
+    private FlatDAO flatDAO = new FlatDAO();
+    private UserDAO userDAO = new UserDAO();
 
 
-    public void createFlat(Flat flat){
+    public void createFlat(Flat flat) {
         flatDAO.beginTransaction();
         flatDAO.save(flat);
         flatDAO.commitTransaction();
         flatDAO.closeTransaction();
     }
-    public List<Flat> listOfAllFlats(){
+
+    public List<Flat> listOfAllFlats() {
         flatDAO.beginTransaction();
-        List<Flat> flats=flatDAO.findAll();
+        List<Flat> flats = flatDAO.findAll();
         flatDAO.closeTransaction();
         return flats;
     }
 
-    public void deleteFlat (Flat flat){
+    public void deleteFlat(Flat flat) {
         flatDAO.beginTransaction();
         Flat flatToDelete = flatDAO.findReference(flat.getId());
         flatDAO.delete(flatToDelete);
@@ -37,9 +38,9 @@ public class FlatFacade {
         flatDAO.closeTransaction();
     }
 
-    public void updateFlat (Flat flat){
+    public void updateFlat(Flat flat) {
         flatDAO.beginTransaction();
-        Flat flatToUpdate=flatDAO.find(flat.getId());
+        Flat flatToUpdate = flatDAO.find(flat.getId());
         flatToUpdate.setName(flat.getName());
         flatToUpdate.setCity(flat.getCity());
         flatToUpdate.setDescription(flat.getDescription());
@@ -51,11 +52,9 @@ public class FlatFacade {
         flatDAO.closeTransaction();
     }
 
-
-
-    public Flat findFlatWithTenants(int flatId){
+    public Flat findFlatWithTenants(int flatId) {
         flatDAO.beginTransaction();
-        Flat flat=flatDAO.findFlatWithTenants(flatId);
+        Flat flat = flatDAO.findFlatWithTenants(flatId);
         flatDAO.closeTransaction();
         return flat;
     }

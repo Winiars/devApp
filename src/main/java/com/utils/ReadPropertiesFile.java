@@ -13,15 +13,12 @@ public class ReadPropertiesFile {
 
     public String getPropertyValue(String key) {
 
-
         try {
-
             inputStream = getClass().getResourceAsStream("/error_en.properties");
             Properties properties = new Properties();
             properties.load(inputStream);
             result = properties.getProperty(key);
             inputStream.close();
-
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

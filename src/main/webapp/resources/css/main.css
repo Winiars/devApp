@@ -113,3 +113,10 @@ p {
     /*background-color: #3e8e41;*/
 /*}*/
 
+.bookedDay {
+    color: red;
+}
+
+.ui-datepicker td.reported-day a {
+    font-weight: bold;
+}

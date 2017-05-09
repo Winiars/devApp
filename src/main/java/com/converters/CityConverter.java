@@ -17,19 +17,20 @@ import javax.faces.convert.FacesConverter;
  */
 @ManagedBean
 @RequestScoped
-@FacesConverter (forClass = City.class)
+@FacesConverter(forClass = City.class)
 public class CityConverter implements Converter {
 
-    private CityFacade cityFacade= new CityFacade();
+    private CityFacade cityFacade = new CityFacade();
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String s) {
         int cityId;
         try {
-           cityId = Integer.parseInt(s);
+            cityId = Integer.parseInt(s);
 
-        }catch (NumberFormatException e){
-            throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR,"problem z konwersją stringa na int","gruby problem"));
+        } catch (NumberFormatException e) {
+            throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "City converter exception",
+                    ""));
         }
         return cityFacade.findCity(cityId);
     }
@@ -37,10 +38,10 @@ public class CityConverter implements Converter {
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object o) {
 
-        if(o==null){
+        if (o == null) {
             return "";
         }
-        City city =(City) o;
+        City city = (City) o;
         return String.valueOf(city.getId());
 
     }

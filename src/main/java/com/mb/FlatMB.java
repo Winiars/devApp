@@ -1,18 +1,13 @@
 package com.mb;
 
+import antlr.StringUtils;
 import com.facade.FlatFacade;
 import com.model.Flat;
-import com.model.User;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
-import javax.faces.convert.FacesConverter;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Gruby on 20.04.2017.
@@ -23,24 +18,12 @@ public class FlatMB extends AbstractMB {
     private FlatFacade flatFacade;
     private Flat flat;
     private Flat flatWithTenants;
-    private String[] bookedDays;
-
-    private static final String QUOTE = "'";
-    private static final String TIME_FORMAT = "T00:00:00";
-    private static final String YEAR_MONTH_DAY_FORMAT = "yyyy-MM-dd";
-
-//    @ManagedProperty(value = "#{userMB}")
-//    private UserMB userMB;
 
     private List<Flat> filteredFlats;
 
     public List<Flat> getFilteredFlats() {
         return filteredFlats;
     }
-
-//    public void setUserMB(UserMB userMB) {
-//        this.userMB = userMB;
-//    }
 
     public void setFilteredFlats(List<Flat> filteredFlats) {
         this.filteredFlats = filteredFlats;
@@ -55,10 +38,8 @@ public class FlatMB extends AbstractMB {
 
     public Flat getFlat() {
         if (flat == null) {
-            System.out.println("flat rowne null");
             this.flat = new Flat();
         }
-        System.out.println("getFlat" + flat.getId());
         return flat;
     }
 
@@ -91,7 +72,6 @@ public class FlatMB extends AbstractMB {
             e.printStackTrace();
             displayInfoMessageToUser("Ops we couldn't delete flat");
         }
-
     }
 
     public void deleteFilteredFlats() {
@@ -106,7 +86,6 @@ public class FlatMB extends AbstractMB {
         }
 
     }
-
 
     public void resetFlat() {
         this.flat = new Flat();
@@ -136,7 +115,6 @@ public class FlatMB extends AbstractMB {
         Flat flatToUpdate = (Flat) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("flat");
         navigateWithFlash();
         this.flat = flatToUpdate;
-
     }
 
 
@@ -154,18 +132,12 @@ public class FlatMB extends AbstractMB {
         return "flatsUpdate?faces-redirect=true";
     }
 
-    public Flat getFlatWithTenants(){
-        if(flatWithTenants==null){
-            flatWithTenants=getFlatFacade().findFlatWithTenants(flat.getId());
-        }return flatWithTenants;
+    public Flat getFlatWithTenants() {
+        if (flatWithTenants == null) {
+            flatWithTenants = getFlatFacade().findFlatWithTenants(flat.getId());
+        }
+        return flatWithTenants;
     }
-
-
-    public String getDisabledDays() {
-        return "[\"5-15-2013\", \"6-23-2013\"]";
-    }
-
-
 
 
 }

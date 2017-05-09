@@ -14,13 +14,13 @@ public class FlatDAO extends GenericDAO<Flat> {
         super(Flat.class);
     }
 
-    public void delete(Flat flat){
+    public void delete(Flat flat) {
         super.delete(flat.getId());
     }
 
-    public Flat findFlatWithTenants(int flatId){
-        Map<String,Object> parameters=new HashMap<String,Object>();
-        parameters.put("flatId",flatId);
-        return findOneResult(Flat.FIND_FLAT_BY_ID_WITH_TENANTS,parameters);
+    public Flat findFlatWithTenants(int flatId) {
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("flatId", flatId);
+        return findOneResult(Flat.FIND_FLAT_BY_ID_WITH_TENANTS, parameters);
     }
 }

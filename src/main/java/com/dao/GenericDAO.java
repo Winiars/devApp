@@ -11,7 +11,8 @@ import java.util.Map;
  */
 public abstract class GenericDAO<T> implements Serializable {
 
-    private static final EntityManagerFactory emf= Persistence.createEntityManagerFactory("DevApp_Persistence");
+    private static final EntityManagerFactory emf =
+            Persistence.createEntityManagerFactory("DevApp_Persistence");
     private EntityManager em;
     private Class<T> entityClass;
     private static final long serialVersionUID = 1L;
@@ -20,25 +21,23 @@ public abstract class GenericDAO<T> implements Serializable {
         this.entityClass = entityClass;
     }
 
-    public void save(T entity){
+    public void save(T entity) {
         em.persist(entity);
     }
 
-    public void beginTransaction(){
-        em=emf.createEntityManager();
+    public void beginTransaction() {
+        em = emf.createEntityManager();
         em.getTransaction().begin();
     }
 
-    public void commitTransaction(){
+    public void commitTransaction() {
         em.getTransaction().commit();
     }
 
-    public void closeTransaction(){
+    public void closeTransaction() {
         em.close();
     }
 
-    // Using the unchecked because JPA does not have a
-    // query.getSingleResult()<T> method
     @SuppressWarnings("unchecked")
     protected T findOneResult(String namedQuery, Map<String, Object> parameters) {
         T result = null;
@@ -46,7 +45,6 @@ public abstract class GenericDAO<T> implements Serializable {
         try {
             Query query = em.createNamedQuery(namedQuery);
 
-            // Method that will populate parameters if they are passed not null and empty
             if (parameters != null && !parameters.isEmpty()) {
                 populateQueryParameters(query, parameters);
             }
@@ -59,7 +57,6 @@ public abstract class GenericDAO<T> implements Serializable {
             System.out.println("Error while running query: " + e.getMessage());
             e.printStackTrace();
         }
-
         return result;
     }
 
@@ -69,37 +66,35 @@ public abstract class GenericDAO<T> implements Serializable {
         }
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public List<T> findAll() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         return em.createQuery(cq).getResultList();
     }
 
-    protected void delete(Object id){
-        T entityToRemove = em.getReference(entityClass,id);
+    protected void delete(Object id) {
+        T entityToRemove = em.getReference(entityClass, id);
         em.remove(entityToRemove);
     }
 
-    public T findReference(int entityId){
-        System.out.println("entity Id= "+entityId);
-        return em.getReference(entityClass,entityId);
+    public T findReference(int entityId) {
+        return em.getReference(entityClass, entityId);
     }
 
-    public T find(int entityId){
+    public T find(int entityId) {
 
-        return em.find(entityClass,entityId);
+        return em.find(entityClass, entityId);
     }
 
-    public T update(T entity){
+    public T update(T entity) {
         return em.merge(entity);
     }
 
-    public void joinTransaction(){
-        em=emf.createEntityManager();
+    public void joinTransaction() {
+        em = emf.createEntityManager();
         em.joinTransaction();
     }
-
 
 
 }
