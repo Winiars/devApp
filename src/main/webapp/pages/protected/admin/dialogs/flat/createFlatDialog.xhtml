@@ -8,15 +8,15 @@
       xmlns:p="http://primefaces.org/ui">
 <h:body>
     <p:dialog widgetVar="flaUpdateDialogWidget"
-             height="150" width="500" modal="true"
+              height="150" width="500" modal="true"
               closable="true" draggable="false" resizable="false">
         <h:form id="flatCreateDialogForm" prependId="false">
             <h:panelGrid columns="2">
                 <h:outputText value="name of flat"/>
-                <h:inputText value="#{flatMB.flat.name}"  label="cityName"/>
-               <h:selectOneMenu value="#{flatMB.flat.city}" required="true">
-               <f:selectItems var="city" value="#{cityMB.allCities}" itemValue="#{city}" itemLabel="#{city.name}"/>
-               </h:selectOneMenu>
+                <h:inputText value="#{flatMB.flat.name}" label="cityName"/>
+                <h:selectOneMenu value="#{flatMB.flat.city}" required="true">
+                    <f:selectItems var="city" value="#{cityMB.allCities}" itemValue="#{city}" itemLabel="#{city.name}"/>
+                </h:selectOneMenu>
 
                 <p:commandButton value="create" icon="ui-icon-plus" action="#{flatMB.createFlat}"
                                  onclick="PF('flatCreateDialogWidget').hide()">

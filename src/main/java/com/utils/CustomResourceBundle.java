@@ -14,8 +14,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Gruby on 06.04.2017.
  */
-public class CustomResourceBundle  extends ResourceBundle{
-
+public class CustomResourceBundle extends ResourceBundle {
 
     protected static final String BUNDLE_NAME = "messages";
     protected static final String BUNDLE_EXTENSION = "properties";
@@ -40,8 +39,7 @@ public class CustomResourceBundle  extends ResourceBundle{
     protected static class UTF8Control extends Control {
         public ResourceBundle newBundle
                 (String baseName, Locale locale, String format, ClassLoader loader, boolean reload)
-                throws IllegalAccessException, InstantiationException, IOException
-        {
+                throws IllegalAccessException, InstantiationException, IOException {
             // The below code is copied from default Control#newBundle() implementation.
             // Only the PropertyResourceBundle line is changed to read the file as UTF-8.
             String bundleName = toBundleName(baseName, locale);

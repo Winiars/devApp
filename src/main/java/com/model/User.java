@@ -38,15 +38,13 @@ public class User implements Serializable {
     private String info;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @ManyToMany(mappedBy = "tenants")
-    private List<Flat> listOfFlats;
 
-    public List<Flat> getListOfFlats() {
-        return listOfFlats;
-    }
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Rent> rents;
 
-    public void setListOfFlats(List<Flat> listOfFlats) {
-        this.listOfFlats = listOfFlats;
+    public void addRent(Rent rent) {
+        rents.add(rent);
+        rent.setUser(this);
     }
 
     public Role getRole() {
@@ -67,22 +65,18 @@ public class User implements Serializable {
 
         return Id == user.Id;
 
-
     }
 
     @Override
     public int hashCode() {
-
         return Id;
     }
 
     public int getId() {
-
         return Id;
     }
 
     public void setId(int id) {
-
         Id = id;
     }
 

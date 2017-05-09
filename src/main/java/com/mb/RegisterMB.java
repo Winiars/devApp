@@ -48,16 +48,12 @@ public class RegisterMB extends AbstractMB implements Serializable {
 
         this.user.setRole(Role.USER);
         getUserFacade().createUser(user);
-
-        displayInfoMessageToUserAfterRedirect("Zarejestrowano użytkownika " + user.getNick());
-
+        displayInfoMessageToUserAfterRedirect("User registered with success" + user.getNick());
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("welcome.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // return "welcome?faces-redirect=true";
     }
 
     public void propertyTest() {

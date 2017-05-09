@@ -14,17 +14,15 @@ import java.util.List;
  */
 @ManagedBean
 @ViewScoped
-public class UserManagerMb extends AbstractMB{
+public class UserManagerMb extends AbstractMB {
 
     private UserFacade userFacade;
     private List<User> listOfUsers;
     private User user;
 
     public List<User> getListOfUsers() {
-
         return this.listOfUsers = getUserFacade().listOfAll();
     }
-
 
     private UserFacade getUserFacade() {
         if (this.userFacade == null) {
@@ -45,18 +43,18 @@ public class UserManagerMb extends AbstractMB{
         this.user = user;
     }
 
-    public void updateUser(){
-        try{
+    public void updateUser() {
+        try {
             getUserFacade().updateUser(this.user);
             resetUser();
             super.displayInfoMessageToUser("User updated with success");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             super.displayErrorMessageToUser("Oops we couldn't update user");
         }
     }
 
-    public Role[] getRoles(){
+    public Role[] getRoles() {
         return Role.values();
     }
 }

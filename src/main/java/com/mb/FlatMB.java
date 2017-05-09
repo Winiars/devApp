@@ -1,17 +1,13 @@
 package com.mb;
 
+import antlr.StringUtils;
 import com.facade.FlatFacade;
 import com.model.Flat;
-import com.model.User;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.convert.FacesConverter;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Gruby on 20.04.2017.
@@ -23,17 +19,10 @@ public class FlatMB extends AbstractMB {
     private Flat flat;
     private Flat flatWithTenants;
 
-    @ManagedProperty(value = "#{userMB}")
-    private UserMB userMB;
-
     private List<Flat> filteredFlats;
 
     public List<Flat> getFilteredFlats() {
         return filteredFlats;
-    }
-
-    public void setUserMB(UserMB userMB) {
-        this.userMB = userMB;
     }
 
     public void setFilteredFlats(List<Flat> filteredFlats) {
@@ -83,7 +72,6 @@ public class FlatMB extends AbstractMB {
             e.printStackTrace();
             displayInfoMessageToUser("Ops we couldn't delete flat");
         }
-
     }
 
     public void deleteFilteredFlats() {
@@ -98,7 +86,6 @@ public class FlatMB extends AbstractMB {
         }
 
     }
-
 
     public void resetFlat() {
         this.flat = new Flat();
@@ -126,8 +113,10 @@ public class FlatMB extends AbstractMB {
 
     public void pullFlatFromFlash() {
         Flat flatToUpdate = (Flat) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("flat");
+        navigateWithFlash();
         this.flat = flatToUpdate;
     }
+
 
     public Date getToday() {
         return new Date();
@@ -143,21 +132,11 @@ public class FlatMB extends AbstractMB {
         return "flatsUpdate?faces-redirect=true";
     }
 
-    public Flat getFlatWithTenants(){
-        if(flatWithTenants==null){
-            flatWithTenants=getFlatFacade().findFlatWithTenants(flat.getId());
-        }return flatWithTenants;
-    }
-
-    public void addUserToFlat(){
-        try{
-            int userId=userMB.getUser().getId();
-            getFlatFacade().addUserToFlat(flat.getId(),userId);
-            displayInfoMessageToUserAfterRedirect("Flat booked successfully!");
-        }catch (Exception e){
-            e.printStackTrace();
-            displayErrorMessageToUser("Oops we couldn't book flat for you");
+    public Flat getFlatWithTenants() {
+        if (flatWithTenants == null) {
+            flatWithTenants = getFlatFacade().findFlatWithTenants(flat.getId());
         }
+        return flatWithTenants;
     }
 
 

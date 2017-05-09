@@ -18,7 +18,6 @@ import javax.faces.validator.ValidatorException;
 @FacesValidator("nickValidator")
 public class NickValidator implements Validator {
 
-
     @Override
     public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
         UserFacade userFacade = new UserFacade();
@@ -27,7 +26,7 @@ public class NickValidator implements Validator {
         if (userFacade.nickAlreadyExists(o.toString())) {
             FacesMessage msg =
                     new FacesMessage(" Nick validation failed.",
-                            "Musisz wpisac inny");
+                            "Nick already exists");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 
             throw new ValidatorException(msg);

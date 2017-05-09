@@ -47,9 +47,28 @@
 
                     <p:commandButton value="update" icon="ui-icon-plus" action="#{flatMB.updateFlat}"/>
 
-
-
                 </h:panelGrid>
+
+                <p:dataTable var="rent" value="#{flatMB.flat.rents}">
+                    <p:column headerText="name">
+                        <h:outputText value="#{rent.user.name}"/>
+                    </p:column>
+
+                    <p:column headerText="email">
+                        <h:outputText value="#{rent.user.email}"/>
+                    </p:column>
+
+                    <p:column headerText="from">
+                        <h:outputText value="#{rent.startDate}"/>
+                    </p:column>
+
+                    <p:column headerText="to">
+                        <h:outputText value="#{rent.finishDate}"/>
+                    </p:column>
+
+
+                </p:dataTable>
+
             </h:form>
 
 

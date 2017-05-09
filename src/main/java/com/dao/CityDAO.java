@@ -11,7 +11,7 @@ public class CityDAO extends GenericDAO<City> {
         super(City.class);
     }
 
-    public void delete(City city){
+    public void delete(City city) {
         super.delete(city.getId());
     }
 

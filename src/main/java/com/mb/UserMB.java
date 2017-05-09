@@ -17,16 +17,17 @@ public class UserMB extends AbstractMB {
     private User user;
 
     public boolean isRoleAdmin() {
-        if(user!=null) {
+        if (user != null) {
             return user.isAdmin();
-        }return false;
+        }
+        return false;
     }
 
     public boolean isRoleUser() {
-        if(user!=null) {
+        if (user != null) {
             return user.isUser();
-        }return false;
-
+        }
+        return false;
     }
 
     public User getUser() {
@@ -37,12 +38,9 @@ public class UserMB extends AbstractMB {
         this.user = user;
     }
 
-    public boolean isRoleAdminOrUser(){
-        return isRoleAdmin()||isRoleUser();
+    public boolean isRoleAdminOrUser() {
+        return isRoleAdmin() || isRoleUser();
     }
-
-
-
 
 
 }

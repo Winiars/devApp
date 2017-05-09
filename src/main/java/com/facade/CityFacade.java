@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class CityFacade {
 
-    private CityDAO cityDAO=new CityDAO();
+    private CityDAO cityDAO = new CityDAO();
 
-    public void createCity (City city){
+    public void createCity(City city) {
         cityDAO.beginTransaction();
         cityDAO.save(city);
         cityDAO.commitTransaction();
@@ -21,25 +21,24 @@ public class CityFacade {
 
     }
 
-
-    public List<City> listOfAll(){
+    public List<City> listOfAll() {
         cityDAO.beginTransaction();
-        List<City> listOfCities= cityDAO.findAll();
+        List<City> listOfCities = cityDAO.findAll();
         cityDAO.closeTransaction();
         return listOfCities;
     }
 
-    public void deleteCity(City city){
+    public void deleteCity(City city) {
         cityDAO.beginTransaction();
-        City cityToDelete=cityDAO.findReference(city.getId());
+        City cityToDelete = cityDAO.findReference(city.getId());
         cityDAO.delete(cityToDelete);
         cityDAO.commitTransaction();
         cityDAO.closeTransaction();
     }
 
-    public City findCity(int cityId){
+    public City findCity(int cityId) {
         cityDAO.beginTransaction();
-        City city=cityDAO.find(cityId);
+        City city = cityDAO.find(cityId);
         cityDAO.closeTransaction();
         return city;
 

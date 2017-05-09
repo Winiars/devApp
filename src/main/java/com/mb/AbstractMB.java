@@ -24,7 +24,6 @@ public class AbstractMB {
         messagesUtil.sendInfoMessageToUserAfterReddirect(message);
     }
 
-
     protected String getPropertyErrorMessageValue(String key) {
         ReadPropertiesFile readPropertiesFile = new ReadPropertiesFile();
         return readPropertiesFile.getPropertyValue(key);

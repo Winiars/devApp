@@ -5,55 +5,90 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <h:head/>
 <f:metadata>
     <f:event type="preRenderView" listener="#{flatMB.pullFlatFromFlash}"/>
+
+
 </f:metadata>
 <h:head/>
 
 
 <h:body>
+    <f:facet name="last">
+        <h:outputStylesheet library="css" name="main.css"/>
+    </f:facet>
+
     <ui:composition template="/pages/public/templates/master.xhtml">
         <ui:define name="main">
             <p:growl id="growl" life="30000" autoUpdate="true"/>
 
             <p align="center"> Flat Reservation </p>
 
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <h:outputText value="name of flat"/>
+                <h:outputText value="#{flatMB.flat.name}" label="cityName"/>
+
+                <h:outputText value="city: "/>
+                <h:outputText value="#{flatMB.flat.city.name}"/>
+
+                <h:outputText value="street: "/>
+                <h:outputText value="#{flatMB.flat.street}"/>
+
+                <h:outputText value="Description: "/>
+                <h:outputText value="#{flatMB.flat.description}"/>
+            </h:panelGrid>
 
 
-            <h:form id="flatsUpdateForm" prependId="false">
+            <h:form id="flatsReservationForm" prependId="false">
+
                 <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputText for="startDate" value="set begining date"/>
+                    <p:calendar id="startDate" value="#{rentMB.rent.startDate}" mindate="#{rentMB.minDate}"
+                                maxdate="#{rentMB.maxDate}" beforeShowDay="disableAllTheseDays" mode="inline" pages="3"
+                                required="true">
+                        <p:ajax event="dateSelect" update="finishDate"/>
+                    </p:calendar>
 
-                    <p:outputLabel value="name of flat"/>
-                    <p:inputText value="#{flatMB.flat.name}" label="cityName"/>
+                    <h:outputText for="finishDate" value="set finish date"/>
+                    <p:calendar id="finishDate" value="#{rentMB.rent.finishDate}" mindate="#{rentMB.minDateForFinish}"
+                                pages="3"
+                                mode="inline"
+                                maxdate="#{rentMB.maxDate}"
+                                navigator="true" pattern="MM-dd-yyyy" beforeShowDay="disableAllTheseDays"
+                                required="true"/>
 
-                    <p:outputLabel value="select city: "/>
-                    <p:selectOneMenu value="#{flatMB.flat.city}" required="true">
-                        <f:selectItems var="city" value="#{cityMB.allCities}" itemValue="#{city}" itemLabel="#{city.name}"/>
-                    </p:selectOneMenu>
 
-                    <p:outputLabel for="startDate" value="set begining date" />
-                    <p:calendar id="startDate" value="#{flatMB.flat.startDate}" />
+                    <p:commandButton value="book" icon="ui-icon-plus" action="#{rentMB.createRent}">
 
-                    <p:outputLabel for="finishDate" value="set finish date" />
-                    <p:calendar id="finishDate" value="#{flatMB.flat.finishDate}" mindate="#{flatMB.today}" />
-
-                    <p:outputLabel value="street: "/>
-                    <p:inputText value="#{flatMB.flat.street}"/>
-
-                    <p:outputLabel value="Description: "/>
-                    <p:outputLabel  value="#{flatMB.flat.description}" />
-
-                    <p:commandButton value="book" icon="ui-icon-plus" action="#{flatMB.addUserToFlat}"/>
-
+                    </p:commandButton>
 
 
                 </h:panelGrid>
             </h:form>
 
+            <script type="text/javascript">
+
+                var disabledDays = new Array(#{rentMB.bookedDays});
+                function disableAllTheseDays(date) {
+                    var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+                    for (i = 0; i &lt; disabledDays.length; i++) {
+                        if ($.inArray((m + 1) + '-' + d + '-' + y, disabledDays) != -1) {
+                            return [false, 'bookedDay'];
+                        }
+                    }
+                    return [true, 'bookedDay'];
+                }
+
+            </script>
+
 
         </ui:define>
     </ui:composition>
+
+
 </h:body>
 </html>
+
